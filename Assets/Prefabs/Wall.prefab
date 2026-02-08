@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2483591292841859651}
   - component: {fileID: 8030815898046913167}
   m_Layer: 0
-  m_Name: Step_003
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -41,7 +41,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 297222980127371107}
-  m_Mesh: {fileID: 3940026501880774275, guid: cfde2c4f5d19f5c48a24ef030cf63cd5, type: 3}
+  m_Mesh: {fileID: 6206450301262281439, guid: ec67dc1c2b70cdb4ca249e8abc9370fd, type: 3}
 --- !u!23 &2483591292841859651
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 23e3ec96eff46a946b0caf0aca245ffb, type: 2}
+  - {fileID: 2100000, guid: 0eb70d5c5ac3463469a818c4db3a418a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -106,5 +106,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2, y: 0.8, z: 2}
-  m_Center: {x: 0, y: 0.4, z: 0}
+  m_Size: {x: 2, y: 1.6, z: 2}
+  m_Center: {x: 0, y: 0.8, z: 0}
