@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class PlayerNavigation : MonoBehaviour
 {
     // public components
-    public GameObject manager_GO;
     public float speed = 1.0f;
 
     // private components
@@ -51,7 +50,7 @@ public class PlayerNavigation : MonoBehaviour
         rigidBody.linearVelocity = forward;
     }
 
-    public void DebugWASD(InputAction.CallbackContext context)
+    public void MovementAxis(InputAction.CallbackContext context)
     {
         Vector3 newAngle = new Vector3(-90, 0, 0);
         currentDirection = new Vector3(
@@ -81,19 +80,20 @@ public class PlayerNavigation : MonoBehaviour
         string tag = other.gameObject.tag;
         switch (tag)
         {
-            case "Item":
+            case "PowerUp":
                 //manager_Script.TouchItem(other.gameObject);
                 break;
             case "Enemy":
                 //manager_Script.TouchEnemy(other.gameObject);
                 break;
-            case "Coin":
+            case "Sphere":
                 //manager_Script.TouchCoin(other.gameObject);
                 break;
             case "Finish":
                 //manager_Script.TouchFinish();
                 break;
             default:
+                Debug.LogError("Unexpected tag at trigger " + other.name);
                 break;
         }
     }
