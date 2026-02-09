@@ -248,6 +248,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1177464775294601007, guid: e07abfb9c4f09964d9c687f1bb3f0d97, type: 3}
+      propertyPath: m_VoxelSize
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1177464775294601007, guid: e07abfb9c4f09964d9c687f1bb3f0d97, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: dc60a3f59fad33a49bd053a418d14329, type: 2}
     - target: {fileID: 1297062530419324568, guid: e07abfb9c4f09964d9c687f1bb3f0d97, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -288,6 +296,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6631452302838732233, guid: e07abfb9c4f09964d9c687f1bb3f0d97, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875452123028377975, guid: e07abfb9c4f09964d9c687f1bb3f0d97, type: 3}
+      propertyPath: m_VoxelSize
+      value: 0.13333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6875452123028377975, guid: e07abfb9c4f09964d9c687f1bb3f0d97, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 1161ddb007697ad458cd1728ef72f2fc, type: 2}
     - target: {fileID: 9013582806650735831, guid: e07abfb9c4f09964d9c687f1bb3f0d97, type: 3}
       propertyPath: m_Name
       value: Map_001
