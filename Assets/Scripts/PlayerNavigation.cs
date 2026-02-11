@@ -52,7 +52,7 @@ public class PlayerNavigation : MonoBehaviour
 
     public void MovementAxis(InputAction.CallbackContext context)
     {
-        Vector3 newAngle = new Vector3(-90, 0, 0);
+        Vector3 newAngle = new Vector3(0, 0, 0);
         currentDirection = new Vector3(
             Input.GetAxisRaw("Horizontal"),
             0,
@@ -77,7 +77,8 @@ public class PlayerNavigation : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        string tag = other.gameObject.tag;
+        GameObject go = other.gameObject;
+        string tag = go.tag;
         switch (tag)
         {
             case "PowerUp":
@@ -85,9 +86,10 @@ public class PlayerNavigation : MonoBehaviour
                 break;
             case "Enemy":
                 //manager_Script.TouchEnemy(other.gameObject);
+                Debug.Log("Ghosted");
                 break;
             case "Sphere":
-                //manager_Script.TouchCoin(other.gameObject);
+                manager_Script.TouchSphere(go);
                 break;
             case "Finish":
                 //manager_Script.TouchFinish();

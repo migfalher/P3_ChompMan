@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +19,12 @@ public class GameManager : MonoBehaviour
         
     }
 
+    // trigger interactions
+    public void TouchSphere(GameObject sphere)
+    {
+        Destroy(sphere);
+    }
+
     // Quit game
     public void QuitGame() { Application.Quit(); }
 
@@ -33,5 +40,15 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogException(e);
         }
+        switch (sceneName)
+        {
+            case "Game":
+                break;
+            default:
+                break;
+        }
     }
+
+    // coroutine 'startGame'
+    private IEnumerator StartGame() { yield return null; }
 }

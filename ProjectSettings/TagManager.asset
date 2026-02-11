@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Sphere
   - PowerUp
+  - Enemy
   layers:
   - Default
   - TransparentFX
