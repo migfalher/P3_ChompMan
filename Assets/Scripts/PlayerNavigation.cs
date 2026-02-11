@@ -82,17 +82,22 @@ public class PlayerNavigation : MonoBehaviour
         switch (tag)
         {
             case "PowerUp":
-                //manager_Script.TouchItem(other.gameObject);
+                manager_Script.TouchPowerUp(other.gameObject);
                 break;
             case "Enemy":
-                //manager_Script.TouchEnemy(other.gameObject);
-                Debug.Log("Ghosted");
+                manager_Script.TouchEnemy(other.gameObject);
                 break;
             case "Sphere":
                 manager_Script.TouchSphere(go);
                 break;
             case "Finish":
-                //manager_Script.TouchFinish();
+                manager_Script.TouchFinishPlane();
+                break;
+            case "Entry_A":
+                this.transform.position = GameObject.Find("Entry_Z").transform.position;
+                break;
+            case "Entry_Z":
+                this.transform.position = GameObject.Find("Entry_A").transform.position;
                 break;
             default:
                 Debug.LogError("Unexpected tag at trigger " + other.name);
