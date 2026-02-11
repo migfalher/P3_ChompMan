@@ -7,7 +7,14 @@ public class GameManager : MonoBehaviour
     // Global variables
     private int dificulty { get; set; }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    // Scene 'Game' variables
+    private bool enemyIsVulnerable { get; set; }
+    private float enemySmallSpeed { get; set; }
+    private float enemyBigSpeed { get; set; }
+    private float powerUpDuration { get; set; }
+    private float powerUpSlowDownDivider {  get; set; }
+
+// Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
@@ -43,12 +50,46 @@ public class GameManager : MonoBehaviour
         switch (sceneName)
         {
             case "Game":
+                StartCoroutine (gameCoroutine());
                 break;
             default:
                 break;
         }
     }
 
-    // coroutine 'startGame'
-    private IEnumerator StartGame() { yield return null; }
+    // coroutine starters
+    // powerUp
+    public void startPowerUpCoroutine() { StartCoroutine (powerUpCoroutine()); }
+    // bunker
+    public void startBunkerCoroutine() { }
+
+    // coroutine 'game'
+    private IEnumerator gameCoroutine()
+    {
+        // set 'Game' variables
+        enemyIsVulnerable = false;
+        switch (dificulty)
+        {
+            case 0:     // easy
+                break;
+            case 1:     // hard
+                break;
+            default:
+                break;
+        }
+
+        yield return null;
+    }
+
+    // coroutine 'powerUp'
+    private IEnumerator powerUpCoroutine()
+    {
+        yield return null;
+    }
+
+    // coroutine 'bunker'
+    private IEnumerator bunkerCoroutine()
+    {
+        yield return null;
+    }
 }
