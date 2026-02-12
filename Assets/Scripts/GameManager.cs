@@ -66,6 +66,9 @@ public partial class GameManager: MonoBehaviour
     private GameObject powerUpSpawnsGO { get; set; }
     private GameObject bunkerRoofGO { get; set; }
     private GameObject bunkerDoorGO { get; set; }
+    // ui elements
+    private TMP_Text timeTMP { get; set; }
+    private TMP_Text ghostCounterTMP { get; set; }
 
     // trigger interactions
     public void TouchSphere(GameObject sphere)
@@ -110,20 +113,20 @@ public partial class GameManager: MonoBehaviour
         switch (dificulty)
         {
             case 0:     // easy
-                enemySmallSpeed = 3.5f;
-                enemyBigSpeed = 3.5f;
-                enemySpawnInterval = 30.0f;
-                powerUpSpawnInterval = 35.0f;
+                enemySmallSpeed = 6.0f;
+                enemyBigSpeed = 3.0f;
+                enemySpawnInterval = 20.0f;
+                powerUpSpawnInterval = 5.0f;
                 powerUpDuration = 15.0f;
-                powerUpSlowDownDivider = 3.0f;
+                powerUpSlowDownDivider = 5.0f;
                 break;
             case 1:     // hard
-                enemySmallSpeed = 0;
-                enemyBigSpeed = 0;
-                enemySpawnInterval = 0;
-                powerUpSpawnInterval = 0;
-                powerUpDuration = 0;
-                powerUpSlowDownDivider = 0;
+                enemySmallSpeed = 10.0f;
+                enemyBigSpeed = 6.0f;
+                enemySpawnInterval = 15.0f;
+                powerUpSpawnInterval = 10.0f;
+                powerUpDuration = 5.0f;
+                powerUpSlowDownDivider = 2.0f;
                 break;
             default:
                 break;
