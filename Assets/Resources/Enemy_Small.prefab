@@ -92,7 +92,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 545d70e89baa9ee4da0b8b8fd944ec34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  regularMat: {fileID: 2100000, guid: a960e73aae7c0ba4897606cfccabbdb1, type: 2}
+  materialsList:
+  - {fileID: 2100000, guid: 6e04362b21954fc45ad39ddc2a56aa97, type: 2}
+  - {fileID: 2100000, guid: 12997fb99c06f4e45bec6ee7fb282dc8, type: 2}
+  - {fileID: 2100000, guid: 93c6449bff3c8d142b70bb95ca377f5e, type: 2}
+  - {fileID: 2100000, guid: 4c8162c779176d1488f37fe20b1a2608, type: 2}
   vulnerableMat: {fileID: 2100000, guid: 23e3ec96eff46a946b0caf0aca245ffb, type: 2}
 --- !u!1 &3298943041426637701
 GameObject:

@@ -52,24 +52,29 @@ public partial class GameManager : MonoBehaviour
 public partial class GameManager: MonoBehaviour
 {
     // variables
-    private int spheresCounter { get; set; }
-    private bool enemyIsVulnerable { get; set; }
-    private float enemySmallSpeed { get; set; }
-    private float enemyBigSpeed { get; set; }
-    private float enemySpawnInterval { get; set; }
-    private float powerUpSpawnInterval { get; set; }
-    private float powerUpDuration { get; set; }
-    private float powerUpSlowDownDivider { get; set; }
+    private int spheresCounter;
+    private bool enemyIsVulnerable;
+    public float enemySmallSpeed;
+    private float enemyBigSpeed;
+    private float enemySpawnInterval;
+    private float powerUpSpawnInterval;
+    private float powerUpDuration;
+    private float powerUpSlowDownDivider;
     // components
-    private GameObject spheresCounterGO { get; set; }
-    private GameObject enemySpawnsGO { get; set; }
-    private GameObject powerUpSpawnsGO { get; set; }
-    private GameObject bunkerRoofGO { get; set; }
-    private GameObject bunkerDoorGO { get; set; }
+    private GameObject spheresCounterGO;
+    private GameObject enemySpawnsGO;
+    private GameObject powerUpSpawnsGO;
+    private GameObject bunkerRoofGO;
+    private GameObject bunkerDoorGO;
     // ui elements
-    private TMP_Text timeTMP { get; set; }
-    private TMP_Text ghostCounterTMP { get; set; }
-    private TMP_Text killsCounterTMP { get; set; }
+    private TMP_Text timeTMP;
+    private TMP_Text ghostCounterTMP;
+    private TMP_Text killsCounterTMP;
+
+    // getters and setters
+    public float getEnemySmallSpeed() { return enemySmallSpeed; }
+    public float getEnemyBigSpeed() { return enemyBigSpeed; }
+    public float getPowerUpSlowDowdDivider() { return powerUpSlowDownDivider; }
 
     // trigger interactions
     public void TouchSphere(GameObject sphere)

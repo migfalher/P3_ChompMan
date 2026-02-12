@@ -1,17 +1,20 @@
 using UnityEngine;
 using UnityEngine.AI;
+using Random = System.Random;
 
 public class EnemyNavigation : MonoBehaviour
 {
-    // public objects
-    public Material regularMat;
+    // materials
+    public Material[] materialsList;
+    private Material regularMaterial;
     public Material vulnerableMat;
-
-    // private components
-    private float regularSpeed;
-    private float vulnerableSpeed;
+    // components
+    private GameManager manager_Script;
     private NavMeshAgent agent;
     private MeshRenderer renderer;
+    // variables
+    private float regularSpeed;
+    private float vulnerableSpeed;
     private string targetTag;
 
     public string getTargetTag() { return targetTag; }
@@ -24,7 +27,7 @@ public class EnemyNavigation : MonoBehaviour
                 agent.speed = vulnerableSpeed;
                 break;
             default:
-                renderer.material = regularMat;
+                renderer.material = regularMaterial;
                 agent.speed = regularSpeed;
                 break;
         }
@@ -33,11 +36,17 @@ public class EnemyNavigation : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        // set components
+        manager_Script = GameObject.Find("GameManager").GetComponent<GameManager>();
         targetTag = "Player";
         agent = this.GetComponent<NavMeshAgent>();
         renderer = this.GetComponentInChildren<MeshRenderer>();
-        regularSpeed = agent.speed;
-        vulnerableSpeed = regularSpeed / 2;
+        regularSpeed = (this.gameObject.name.Equals("EnemySmall")) ? manager_Script.getEnemySmallSpeed() : manager_Script.getEnemyBigSpeed() ;
+        vulnerableSpeed = regularSpeed / manager_Script.getPowerUpSlowDowdDivider();
+
+        // set random material
+        regularMaterial = materialsList[(new Random()).Next(0, materialsList.Length)];
+        renderer.material = regularMaterial;
     }
 
     // Update is called once per frame
