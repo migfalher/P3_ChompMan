@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7644620502940613510}
   - component: {fileID: 5143114482587976413}
-  - component: {fileID: 1834767270421420778}
   - component: {fileID: 5832105457696282388}
+  - component: {fileID: 1834767270421420778}
   m_Layer: 0
   m_Name: Enemy_Big
   m_TagString: Enemy
@@ -57,20 +57,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &1834767270421420778
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 15211472161343907}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 545d70e89baa9ee4da0b8b8fd944ec34, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  regularMat: {fileID: 2100000, guid: a960e73aae7c0ba4897606cfccabbdb1, type: 2}
-  vulnerableMat: {fileID: 2100000, guid: 23e3ec96eff46a946b0caf0aca245ffb, type: 2}
 --- !u!136 &5832105457696282388
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -94,6 +80,20 @@ CapsuleCollider:
   m_Height: 7.6
   m_Direction: 1
   m_Center: {x: 0, y: 2, z: 0}
+--- !u!114 &1834767270421420778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15211472161343907}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 545d70e89baa9ee4da0b8b8fd944ec34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  regularMat: {fileID: 2100000, guid: a960e73aae7c0ba4897606cfccabbdb1, type: 2}
+  vulnerableMat: {fileID: 2100000, guid: 23e3ec96eff46a946b0caf0aca245ffb, type: 2}
 --- !u!1 &3298943041426637701
 GameObject:
   m_ObjectHideFlags: 0

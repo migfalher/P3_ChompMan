@@ -9,6 +9,7 @@ TagManager:
   - Enemy
   - Entry_A
   - Entry_Z
+  - Hideout
   layers:
   - Default
   - TransparentFX

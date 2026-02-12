@@ -1740,7 +1740,7 @@ GameObject:
   - component: {fileID: 7444975781108029392}
   m_Layer: 0
   m_Name: Hideout
-  m_TagString: Untagged
+  m_TagString: Hideout
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
