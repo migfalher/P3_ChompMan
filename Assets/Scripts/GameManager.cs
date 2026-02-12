@@ -69,6 +69,7 @@ public partial class GameManager: MonoBehaviour
     // ui elements
     private TMP_Text timeTMP { get; set; }
     private TMP_Text ghostCounterTMP { get; set; }
+    private TMP_Text killsCounterTMP { get; set; }
 
     // trigger interactions
     public void TouchSphere(GameObject sphere)
