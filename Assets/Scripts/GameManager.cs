@@ -11,7 +11,7 @@ public partial class GameManager : MonoBehaviour
     // Global variables
     private int dificulty { get; set; }
     private bool victory { get; set; }
-    private float timeCount { get; set; }
+    private TimeCounter timeCounter { get; set; }
     private float ghostKills { get; set; }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -19,7 +19,7 @@ public partial class GameManager : MonoBehaviour
     {
         dificulty = 0;
         victory = false;
-        timeCount = 0;
+        timeCounter = this.gameObject.GetComponent<TimeCounter>();
         ghostKills = 0;
     }
 
@@ -53,8 +53,10 @@ public partial class GameManager: MonoBehaviour
 {
     // variables
     private int spheresCounter;
+    private int ghostCounter;
+    private int killsCounter;
     private bool enemyIsVulnerable;
-    public float enemySmallSpeed;
+    private float enemySmallSpeed;
     private float enemyBigSpeed;
     private float enemySpawnInterval;
     private float powerUpSpawnInterval;
@@ -67,7 +69,6 @@ public partial class GameManager: MonoBehaviour
     private GameObject bunkerRoofGO;
     private GameObject bunkerDoorGO;
     // ui elements
-    private TMP_Text timeTMP;
     private TMP_Text ghostCounterTMP;
     private TMP_Text killsCounterTMP;
 
@@ -89,10 +90,15 @@ public partial class GameManager: MonoBehaviour
         if (enemyIsVulnerable)
         {
             Destroy (enemy);
+            ghostCounter = (ghostCounter < 0) ? 0 : ghostCounter - 1;
+            ghostCounterTMP.text = (ghostCounter < 10) ? ("0" + ghostCounter.ToString()) : ghostCounter.ToString();
+            killsCounter++;
+            killsCounterTMP.text = (killsCounter < 10) ? ("0" + killsCounter.ToString()) : killsCounter.ToString();
         }
         else
         {
             victory = false;
+            timeCounter.setTimeCounterIsOn(false);
             LoadScene("Finish");
         }
     }
@@ -141,10 +147,16 @@ public partial class GameManager: MonoBehaviour
         // get components
         spheresCounterGO = GameObject.Find("SpheresCounter (TMP)");
         spheresCounterGO.GetComponent<TMP_Text>().text = spheresCounter.ToString();
+        ghostCounterTMP = GameObject.Find("GhostCounter (TMP)").GetComponent<TMP_Text>();
+        killsCounterTMP = GameObject.Find("KillsCounter (TMP)").GetComponent<TMP_Text>();
+        timeCounter.setTimeCounterTMP(GameObject.Find("TimeCounter (TMP)").GetComponent<TMP_Text>());
         enemySpawnsGO = GameObject.Find("Enemy Spawns");
         powerUpSpawnsGO = GameObject.Find("Item Spawns");
         bunkerDoorGO = GameObject.Find("Door");
         bunkerRoofGO = GameObject.Find("Roof");
+
+        // start time counter
+        timeCounter.setTimeCounterIsOn(true);
 
         // start secondary coroutines
         StartCoroutine( enemiesSpawnCoroutine() );
@@ -173,6 +185,9 @@ public partial class GameManager: MonoBehaviour
             // instantiate enemies
             Instantiate(enemySmallGO, enemySmallGO.transform.position, Quaternion.identity);
             Instantiate(enemyBigGO, enemyBigGO.transform.position, Quaternion.identity);
+            // update 'ghostCounter'
+            ghostCounter = GameObject.FindGameObjectsWithTag("Enemy").Length;
+            ghostCounterTMP.text = (ghostCounter < 10) ? ("0" + ghostCounter.ToString()) : ghostCounter.ToString();
             // wait for interval
             yield return new WaitForSeconds(enemySpawnInterval);
         }

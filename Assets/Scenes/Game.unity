@@ -764,7 +764,7 @@ GameObject:
   - component: {fileID: 1307040078}
   - component: {fileID: 1307040077}
   m_Layer: 5
-  m_Name: Time (TMP)
+  m_Name: TimeCounter (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1203,7 +1203,7 @@ GameObject:
   - component: {fileID: 2114170050}
   - component: {fileID: 2114170049}
   m_Layer: 5
-  m_Name: Kill (Image)
+  m_Name: Kills (Image)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
