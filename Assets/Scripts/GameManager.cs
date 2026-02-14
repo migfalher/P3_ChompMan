@@ -225,8 +225,14 @@ public partial class GameManager: MonoBehaviour
         {
             enemy.GetComponent<EnemyNavigation>().setTargetTag("Hideout");
         }
+
         yield return new WaitForSeconds(powerUpDuration);
+
         enemyIsVulnerable = false;
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            enemy.GetComponent<EnemyNavigation>().setTargetTag("Player");
+        }
     }
 
     // after gathering all spheres, open bunker
