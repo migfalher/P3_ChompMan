@@ -10,6 +10,7 @@ TagManager:
   - Entry_A
   - Entry_Z
   - Hideout
+  - Checker
   layers:
   - Default
   - TransparentFX

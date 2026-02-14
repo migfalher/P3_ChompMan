@@ -90,8 +90,8 @@ public class PlayerNavigation : MonoBehaviour
             case "Sphere":
                 manager_Script.TouchSphere(go);
                 break;
-            case "Finish":
-                manager_Script.TouchFinishPlane();
+            case "Checker":
+                manager_Script.TouchChecker();
                 break;
             case "Entry_A":
                 this.transform.position = GameObject.Find("Entry_Z").transform.position;

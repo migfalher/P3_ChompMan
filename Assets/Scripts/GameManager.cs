@@ -4,20 +4,26 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using Random = System.Random;
 
 public partial class GameManager : MonoBehaviour
 {
+    // didn't know how to get this programatically
+    public GameObject panel;
+
     // Global variables
     private int dificulty { get; set; }
     private bool victory { get; set; }
     private TimeCounter timeCounter { get; set; }
     private float ghostKills { get; set; }
 
+    public void setDificulty(int _dificulty) { dificulty = _dificulty; }
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        dificulty = 0;
+        dificulty = -1;
         victory = false;
         timeCounter = this.gameObject.GetComponent<TimeCounter>();
         ghostKills = 0;
@@ -25,6 +31,20 @@ public partial class GameManager : MonoBehaviour
 
     // Quit game
     public void QuitGame() { Application.Quit(); }
+
+    // activate dificulty panel
+    public void dificultyPanel()
+    {
+        panel.SetActive(true);
+        StartCoroutine( LoadGame() );
+    }
+
+    private IEnumerator LoadGame()
+    {
+        yield return new WaitUntil(() => dificulty > -1);
+        LoadScene("Game");
+        StartCoroutine(gameCoroutine());
+    }
 
     // Load scene of given name, without destroying current GameManager
     public void LoadScene(string sceneName)
@@ -41,7 +61,15 @@ public partial class GameManager : MonoBehaviour
         switch (sceneName)
         {
             case "Game":
-                StartCoroutine (gameCoroutine());
+                StartCoroutine( gameCoroutine() );
+                break;
+            case "Finish":
+                StartCoroutine( finishCoroutine() );
+                break;
+            case "Menu":
+                dificulty = -1;
+                victory = false;
+                ghostKills = 0;
                 break;
             default:
                 break;
@@ -80,13 +108,21 @@ public partial class GameManager: MonoBehaviour
     // trigger interactions
     public void TouchSphere(GameObject sphere)
     {
-        Destroy(sphere);
+        if (spheresCounterGO == null)
+        {
+            spheresCounterGO = GameObject.Find("SpheresCounter (TMP)");
+        }
+        sphere.SetActive(false);
         spheresCounterGO.GetComponent<TMP_Text>().text = (--spheresCounter).ToString();
         if (spheresCounter <= 0) { StartCoroutine(bunkerCoroutine()); }
     }
 
     public void TouchEnemy(GameObject enemy)
     {
+        if (ghostCounterTMP == null)
+        {
+            ghostCounterTMP = GameObject.Find("GhostCounter (TMP)").GetComponent<TMP_Text>();
+        }
         if (enemyIsVulnerable)
         {
             Destroy (enemy);
@@ -97,6 +133,7 @@ public partial class GameManager: MonoBehaviour
         }
         else
         {
+            // colocar en corrutina para pausa de 0.5 segundos
             victory = false;
             timeCounter.setTimeCounterIsOn(false);
             LoadScene("Finish");
@@ -105,13 +142,13 @@ public partial class GameManager: MonoBehaviour
 
     public void TouchPowerUp(GameObject powerUp)
     {
-        Destroy(powerUp);
+        powerUp.SetActive(false);
         StartCoroutine( powerUpEffectCoroutine() );
     }
 
-    public void TouchFinishPlane()
+    public void TouchChecker()
     {
-        StartCoroutine( finishCoroutine() );
+        StartCoroutine( checkerCoroutine() );
     }
 
     // coroutines
@@ -245,10 +282,44 @@ public partial class GameManager: MonoBehaviour
     }
 
     // when crossing checker line, finish the game
-    private IEnumerator finishCoroutine()
+    private IEnumerator checkerCoroutine()
     {
         victory = true;
         yield return new WaitForSeconds(0.5f);
         LoadScene("Finish");
+        StartCoroutine ( finishCoroutine() );
+    }
+}
+
+public partial class GameManager : MonoBehaviour
+{
+    // didn't know how to get these programatically
+    public Mesh mesh001;
+    public Mesh mesh002;
+
+    // components
+    private TMP_Text gameoverTMP;
+    private GameObject characterStatue;
+    private TMP_Text timeTMP;
+    private TMP_Text killsTMP;
+    private Button button;
+    // getters and setters
+
+    // coroutines
+    // start scene 'Finish'
+    private IEnumerator finishCoroutine()
+    {
+        yield return new WaitForSeconds(0.1f);
+        gameoverTMP = GameObject.Find("Text (TMP) (0)").GetComponent<TMP_Text>();
+        gameoverTMP.text = (victory) ? "Has Ganado" : "Has perdido";
+        characterStatue = GameObject.Find("CharacterStatue");
+        characterStatue.GetComponent<MeshFilter>().mesh = (victory) ? mesh001 : mesh002;
+        timeTMP = GameObject.Find("Text (TMP) (2)").GetComponent<TMP_Text>();
+        timeTMP.text = timeCounter.getTimeCounterText();
+        killsTMP = GameObject.Find("Text (TMP) (4)").GetComponent<TMP_Text>();
+        killsTMP.text = killsCounter.ToString();
+        button = GameObject.Find("Button (0)").GetComponent<Button>();
+        button.onClick.AddListener(() => LoadScene("Menu"));
+        StopAllCoroutines();
     }
 }
