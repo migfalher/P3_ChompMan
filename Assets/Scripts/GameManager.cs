@@ -71,6 +71,9 @@ public partial class GameManager : MonoBehaviour
                 victory = false;
                 ghostKills = 0;
                 break;
+            case "Credits":
+                StartCoroutine( creditsCoroutine() );
+                break;
             default:
                 break;
         }
@@ -318,6 +321,15 @@ public partial class GameManager : MonoBehaviour
         timeTMP.text = timeCounter.getTimeCounterText();
         killsTMP = GameObject.Find("Text (TMP) (4)").GetComponent<TMP_Text>();
         killsTMP.text = killsCounter.ToString();
+        button = GameObject.Find("Button (0)").GetComponent<Button>();
+        button.onClick.AddListener(() => LoadScene("Menu"));
+        StopAllCoroutines();
+    }
+
+    // start scene 'Credits'
+    private IEnumerator creditsCoroutine()
+    {
+        yield return new WaitForSeconds(0.1f);
         button = GameObject.Find("Button (0)").GetComponent<Button>();
         button.onClick.AddListener(() => LoadScene("Menu"));
         StopAllCoroutines();
