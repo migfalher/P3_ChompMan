@@ -9,7 +9,7 @@ public class EnemyNavigation : MonoBehaviour
     private Material regularMaterial;
     public Material vulnerableMat;
     // components
-    private GameManager manager_Script;
+    private ManagerOfGame manager_Script;
     private NavMeshAgent agent;
     private MeshRenderer renderer;
     // variables
@@ -37,7 +37,7 @@ public class EnemyNavigation : MonoBehaviour
     void Start()
     {
         // set components
-        manager_Script = GameObject.Find("GameManager").GetComponent<GameManager>();
+        manager_Script = GameObject.Find("GameManager").GetComponent<ManagerOfGame>();
         targetTag = "Player";
         agent = this.GetComponent<NavMeshAgent>();
         renderer = this.GetComponentInChildren<MeshRenderer>();

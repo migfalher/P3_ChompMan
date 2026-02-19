@@ -11,7 +11,7 @@ public class PlayerNavigation : MonoBehaviour
     public float speed = 1.0f;
 
     // private components
-    private GameManager manager_Script;
+    private ManagerOfGame manager_Script;
     private GameObject mesh;
     private Rigidbody rigidBody;
     private Vector3 forward = Vector3.zero;
@@ -30,7 +30,7 @@ public class PlayerNavigation : MonoBehaviour
 
     private void Start()
     {
-        manager_Script = GameObject.Find("GameManager").GetComponent<GameManager>();
+        manager_Script = GameObject.Find("GameManager").GetComponent<ManagerOfGame>();
         mesh = this.transform.GetChild(0).gameObject;
         rigidBody = this.GetComponent<Rigidbody>();
     }

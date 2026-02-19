@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -26,6 +27,7 @@ public class TimeCounter : MonoBehaviour
     }
 
     // Update is called once per frame
+    /*
     void Update()
     {
         if (timeCounterIsOn) {
@@ -33,5 +35,18 @@ public class TimeCounter : MonoBehaviour
             timeCounterText = TimeSpan.FromSeconds(timeCounter).ToString("hh':'mm':'ss");
             timeCounterTMP.text = timeCounterText;
         }
+    }*/
+
+    private IEnumerator StartTimeCount()
+    {
+        timeCounterIsOn = true;
+        while (timeCounterIsOn)
+        {
+            timeCounter += Time.deltaTime;
+            timeCounterText = TimeSpan.FromSeconds(timeCounter).ToString("hh':'mm':'ss");
+            timeCounterTMP.text = timeCounterText;
+        }
+        yield return new WaitUntil(() => !timeCounterIsOn);
+        Debug.Log(timeCounterText);
     }
 }
