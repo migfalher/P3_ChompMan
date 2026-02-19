@@ -19,34 +19,27 @@ public class TimeCounter : MonoBehaviour
     public string getTimeCounterText() { return timeCounterText; }
     public void resetTimeCounter() { timeCounter = 0; }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    // Awake
+    private void Awake()
     {
         timeCounter = 0;
         timeCounterIsOn = false;
     }
 
-    // Update is called once per frame
-    /*
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+
+    }
+
     void Update()
     {
-        if (timeCounterIsOn) {
-            timeCounter += Time.deltaTime;
-            timeCounterText = TimeSpan.FromSeconds(timeCounter).ToString("hh':'mm':'ss");
-            timeCounterTMP.text = timeCounterText;
-        }
-    }*/
-
-    private IEnumerator StartTimeCount()
-    {
-        timeCounterIsOn = true;
-        while (timeCounterIsOn)
+        if (timeCounterIsOn)
         {
             timeCounter += Time.deltaTime;
             timeCounterText = TimeSpan.FromSeconds(timeCounter).ToString("hh':'mm':'ss");
             timeCounterTMP.text = timeCounterText;
         }
-        yield return new WaitUntil(() => !timeCounterIsOn);
-        Debug.Log(timeCounterText);
     }
+
 }

@@ -30,7 +30,7 @@ public class PlayerNavigation : MonoBehaviour
 
     private void Start()
     {
-        manager_Script = GameObject.Find("GameManager").GetComponent<ManagerOfGame>();
+        manager_Script = GameObject.Find("ScriptHolder").GetComponent<ManagerOfGame>();
         mesh = this.transform.GetChild(0).gameObject;
         rigidBody = this.GetComponent<Rigidbody>();
     }
@@ -72,7 +72,6 @@ public class PlayerNavigation : MonoBehaviour
             
             mesh.transform.localEulerAngles = newAngle;
         }
-
     }
 
     private void OnTriggerEnter(Collider other)

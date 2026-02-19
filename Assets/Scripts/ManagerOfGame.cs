@@ -53,19 +53,20 @@ public partial class ManagerOfGame: MonoBehaviour
         // initialize variables
         GlobalVariables.fulfillSpheresCounter(GameObject.Find("Spheres Parent").transform.childCount);
         timeCounter.setTimeCounterTMP(GameObject.Find("TimeCounter (TMP)").GetComponent<TMP_Text>());
+        spheresCounterTMP.text = GlobalVariables.getSpheresCounter().ToString();
         
         // set dificulty
         switch (GlobalVariables.getDificulty())
         {
-            case 0:     // easy
+            case 1:     // easy
                 enemySmallSpeed = 6.0f;
                 enemyBigSpeed = 3.0f;
-                enemySpawnInterval = 20.0f;
+                enemySpawnInterval = 30.0f;
                 powerUpSpawnInterval = 5.0f;
                 powerUpDuration = 15.0f;
                 powerUpSlowDownDivider = 5.0f;
                 break;
-            case 1:     // hard
+            case 2:     // hard
                 enemySmallSpeed = 10.0f;
                 enemyBigSpeed = 6.0f;
                 enemySpawnInterval = 15.0f;
@@ -80,17 +81,22 @@ public partial class ManagerOfGame: MonoBehaviour
         // start secondary coroutines
         StartCoroutine(enemiesSpawnCoroutine());
         StartCoroutine(powerUpSpawnCoroutine());
+        timeCounter.setTimeCounterIsOn(true);
     }
 
     // Update
     private void Update()
     {
-        
+        // update 'ghostCounter'
+        int ghostCount = GlobalVariables.getGhostCounter();
+        GlobalVariables.updateGhostCounter(GameObject.FindGameObjectsWithTag("Enemy").Length);
+        ghostCounterTMP.text = (ghostCount < 10) ? ("0" + ghostCount.ToString()) : ghostCount.ToString();
     }
 
     // trigger interactions
     public void TouchSphere(GameObject sphere)
     {
+        sphere.SetActive(false);
         GlobalVariables.subtractSpheresCounter();
         if (GlobalVariables.getSpheresCounter() <= 0)
         {
@@ -106,8 +112,8 @@ public partial class ManagerOfGame: MonoBehaviour
     {
         if (enemyIsVulnerable)
         {
-            Destroy (enemy);
-            ghostCounterTMP.text = GlobalVariables.getTimeText();
+            enemy.SetActive(false);
+            ghostCounterTMP.text = GlobalVariables.getGhostCounter().ToString();
             GlobalVariables.addKillsCounter();
             killsCounterTMP.text = (GlobalVariables.getKillsCounter() < 10) ? ("0" + GlobalVariables.getKillsCounter().ToString()) : GlobalVariables.getKillsCounter().ToString();
         }
@@ -152,9 +158,6 @@ public partial class ManagerOfGame: MonoBehaviour
             // instantiate enemies
             Instantiate(enemySmallGO, enemySmallGO.transform.position, Quaternion.identity);
             Instantiate(enemyBigGO, enemyBigGO.transform.position, Quaternion.identity);
-            // update 'ghostCounter'
-            GlobalVariables.updateGhostCounter(GameObject.FindGameObjectsWithTag("Enemy").Length);
-            ghostCounterTMP.text = (GlobalVariables.getGhostCounter() < 10) ? ("0" + GlobalVariables.getGhostCounter().ToString()) : GlobalVariables.getGhostCounter().ToString();
             // wait for interval
             yield return new WaitForSeconds(enemySpawnInterval);
         }
@@ -210,6 +213,7 @@ public partial class ManagerOfGame: MonoBehaviour
         GlobalVariables.setVictory(false);
         Time.timeScale = 0.0f;
         yield return new WaitForSecondsRealtime(0.5f);
+        Time.timeScale = 1.0f;
         SceneManager.LoadScene("Finish");
     }
 
@@ -226,6 +230,7 @@ public partial class ManagerOfGame: MonoBehaviour
     private IEnumerator checkerCoroutine()
     {
         GlobalVariables.setVictory(true);
+        timeCounter.setTimeCounterIsOn(false);
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene("Finish");
     }

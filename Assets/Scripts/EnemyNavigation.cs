@@ -37,7 +37,7 @@ public class EnemyNavigation : MonoBehaviour
     void Start()
     {
         // set components
-        manager_Script = GameObject.Find("GameManager").GetComponent<ManagerOfGame>();
+        manager_Script = GameObject.Find("ScriptHolder").GetComponent<ManagerOfGame>();
         targetTag = "Player";
         agent = this.GetComponent<NavMeshAgent>();
         renderer = this.GetComponentInChildren<MeshRenderer>();
